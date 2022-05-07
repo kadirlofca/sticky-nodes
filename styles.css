@@ -5,7 +5,6 @@
 :root {
 	--sncolor: #FEF967; /* Lighter version of KL Lemon Colors #Fff606*/
 	--snaccent: #E4FE67;
-	--snframe: 2px;
 }
 
 .window-node{
@@ -20,13 +19,9 @@
 }
 
 .node-bar{
-	position: absolute;
-	top: 0; right: 0; bottom: 10px; left: 0;
-	margin-right: 2px;
-	margin-left: 2px;
-	
-	text-align:justify;
-	align-content: space-evenly;
+	position: relative;
+	justify-content: space-between;
+	display: flex;
 }
 
 .node-bar-button{
@@ -39,15 +34,15 @@
 .node-bar-button:hover{
 	background: transparent;
 	border: 0;
-	color: red;
+	color: gray;
 	
 	-webkit-app-region: no-drag;
 }
 
 .node-editor-border{
 	position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-	margin-top: 15px;
+	top: 0; right: 0; bottom: 0; left: 0;
+	margin-top: 35px;
 	margin-bottom: 2.5px;
 	margin-right: 2px;
 	margin-left: 2px;

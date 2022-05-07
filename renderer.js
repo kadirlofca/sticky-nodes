@@ -1,16 +1,7 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// No Node.js APIs are available in this process because
-// `nodeIntegration` is turned off. Use `preload.js` to
-// selectively enable features needed in the rendering
-// process.
+// Quit
+const {ipcRenderer} = require('electron');
+const buttonquit = document.getElementById('buttonquit');
 
-const ipc = require('electron').ipcRenderer
-
-// close app
-function closeApp(e) {
-  e.preventDefault()
-  ipc.send('close')
-}
-
-document.getElementById("quitbutton").addEventListener("click", closeApp);
+buttonquit.addEventListener('click', () => {
+    ipcRenderer.send('quitapp')
+});

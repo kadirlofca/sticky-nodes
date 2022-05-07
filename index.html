@@ -2,24 +2,36 @@
 <html class="window-node">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
     <link href="./styles.css" rel="stylesheet">
 	<link href="./assets/fontawesome/css/all.css" rel="stylesheet">
     <title>Sticky Nodes</title>
   </head>
   <body>
-        <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
 	
+
+
+
+
+  <!-- Toolbar -->
   <div class="node-bar">
-  <button class="node-bar-button"><i class="fa-solid fa-ellipsis"></i></button>
-  <button class="node-bar-button"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <button class="node-bar-button"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+    <button class="node-bar-button"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i></button>
+    <button class="node-bar-button" id="buttonquit"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
   </div>
+
+  <!-- Text Editor -->
   <div class = "node-editor-border">
-	<div class="node-editor-text">
-    <h2 style="margin: 0;">Sticky Nodes</h2>
-	Enter your note here...
-	</div>
+    <div class="node-editor-text">
+      <h2 style="margin: 0;">Sticky Nodes</h2>
+    Enter your note here...
+    </div>
   </div>
+
+
+
+
+
+  <script src="./renderer.js"></script>
+
   </body>
 </html>
