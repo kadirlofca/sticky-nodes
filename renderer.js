@@ -4,3 +4,13 @@
 // `nodeIntegration` is turned off. Use `preload.js` to
 // selectively enable features needed in the rendering
 // process.
+
+const ipc = require('electron').ipcRenderer
+
+// close app
+function closeApp(e) {
+  e.preventDefault()
+  ipc.send('close')
+}
+
+document.getElementById("quitbutton").addEventListener("click", closeApp);
