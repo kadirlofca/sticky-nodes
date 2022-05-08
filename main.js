@@ -1,23 +1,18 @@
 console.time("start-timer");
 
-// Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain} = require('electron')
+const { app, BrowserWindow, ipcMain, globalShortcut  } = require('electron')
 const path = require('path')
-let trayIcon = null
 
-function createWindow () {
+/* #region  Window */
+function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     show: false,
     width: 200,
     height: 250,
-	minWidth: 200,
-	minHeight: 250,
-	maxWidth: 400,
-	maxHeight: 500,
-	frame: false,
-	maximizable: false,
-	skipTaskbar: true,
+    frame: false,
+    maximizable: false,
+    skipTaskbar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
@@ -25,23 +20,42 @@ function createWindow () {
       enableRemoteModule: true
     }
   })
-  
+
+  mainWindow.setResizable(false);
+
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
   })
 
-mainWindow.on('resize', ()=>{
-    mainWindow.setAspectRatio(4/5);
-});
-
-  // On top of most things, ex. task manager will be on top of this.
-  mainWindow.setAlwaysOnTop(true);
+  mainWindow.on('resize', () => {
+    mainWindow.setAspectRatio(4 / 5);
+  });
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
-    //Used to auto open dev tools for debugging
-  //mainWindow.openDevTools();  
+  mainWindow.setAlwaysOnTop(true);
+
+  const pop = globalShortcut.register('CommandOrControl+X', () => {
+    if(mainWindow.isAlwaysOnTop()){
+      mainWindow.hide();
+      mainWindow.setAlwaysOnTop(false);
+    }
+    else{
+      mainWindow.show();
+      mainWindow.focus();
+      mainWindow.setAlwaysOnTop(true);
+      mainWindow.webContents.send('appfocused');
+    }
+  })
+
+  ipcMain.on('opentree', () => {
+    mainWindow.loadURL(`file://${__dirname}/` + "tree.html")
+  })
+
+  //Used to auto open dev tools for debugging
+  //mainWindow.openDevTools(); 
+
 }
 
 // Create window
@@ -59,3 +73,9 @@ app.on('window-all-closed', function () {
 ipcMain.on('quitapp', (evt, arg) => {
   app.quit()
 })
+
+app.on('will-quit', () => {
+  // Unregister all shortcuts.
+  globalShortcut.unregisterAll()
+})
+/* #endregion */

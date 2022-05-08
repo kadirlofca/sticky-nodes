@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html class="window-node">
+<html class="window-node" id="window">
   <head>
     <meta charset="UTF-8">
     <link href="./styles.css" rel="stylesheet">
+    <style>
+      body {
+        overflow: hidden;
+      }
+    </style>
 	<link href="./assets/fontawesome/css/all.css" rel="stylesheet">
     <title>Sticky Nodes</title>
   </head>
-  <body>
+  <body 
 	
 
 
@@ -14,23 +19,23 @@
 
   <!-- Toolbar -->
   <div class="node-bar">
-    <button class="node-bar-button"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
-    <button class="node-bar-button"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i></button>
-    <button class="node-bar-button" id="buttonquit"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <div><button class="node-bar-button"><i class="fa-solid fa-plus"></i></button>
+    <button class="node-bar-button" id="buttontree"><i class="fa-solid fa-grip"></i></button>
+    </div>
+    <button class="node-bar-button" id="buttonquit"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
   <!-- Text Editor -->
   <div class = "node-editor-border">
-    <div class="node-editor-text">
-      <h2 style="margin: 0;">Sticky Nodes</h2>
-    Enter your note here...
+    <div class="node-editor-text" id="editorjs">
+
     </div>
   </div>
 
 
 
 
-
+  <script src="editor.js"></script>
   <script src="./renderer.js"></script>
 
   </body>
