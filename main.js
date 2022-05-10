@@ -21,7 +21,11 @@ function createWindow() {
     }
   })
 
+  // and load the index.html of the app.
+  mainWindow.loadFile('index.html')
+  
   mainWindow.setResizable(false);
+  mainWindow.setAlwaysOnTop(true);
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
@@ -30,11 +34,6 @@ function createWindow() {
   mainWindow.on('resize', () => {
     mainWindow.setAspectRatio(4 / 5);
   });
-
-  // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
-
-  mainWindow.setAlwaysOnTop(true);
 
   const pop = globalShortcut.register('CommandOrControl+X', () => {
     if(mainWindow.isAlwaysOnTop()){
@@ -54,7 +53,7 @@ function createWindow() {
   })
 
   //Used to auto open dev tools for debugging
-  //mainWindow.openDevTools(); 
+  mainWindow.openDevTools(); 
 
 }
 
