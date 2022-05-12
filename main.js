@@ -2,14 +2,15 @@ console.time("start-timer");
 
 const { app, BrowserWindow, ipcMain, globalShortcut  } = require('electron')
 const path = require('path')
+let mainWindow = null;
 
 /* #region  Window */
 function createWindow() {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     show: false,
-    width: 200,
-    height: 250,
+    width: 600,
+    height: 750,
     frame: false,
     maximizable: false,
     skipTaskbar: true,
@@ -17,7 +18,8 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       contextIsolation: false,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      backgroundThrottling: false,
     }
   })
 
@@ -26,6 +28,7 @@ function createWindow() {
   
   mainWindow.setResizable(false);
   mainWindow.setAlwaysOnTop(true);
+  mainWindow.setMenu(null);
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
@@ -35,7 +38,7 @@ function createWindow() {
     mainWindow.setAspectRatio(4 / 5);
   });
 
-  const pop = globalShortcut.register('CommandOrControl+X', () => {
+  const pop = globalShortcut.register('CommandOrControl+Q', () => {
     if(mainWindow.isAlwaysOnTop()){
       mainWindow.hide();
       mainWindow.setAlwaysOnTop(false);
@@ -46,10 +49,6 @@ function createWindow() {
       mainWindow.setAlwaysOnTop(true);
       mainWindow.webContents.send('appfocused');
     }
-  })
-
-  ipcMain.on('opentree', () => {
-    mainWindow.loadURL(`file://${__dirname}/` + "tree.html")
   })
 
   //Used to auto open dev tools for debugging
@@ -68,13 +67,18 @@ app.on('window-all-closed', function () {
   app.quit()
 })
 
+app.on('will-quit', () => {
+  // Unregister all shortcuts.
+  globalShortcut.unregisterAll()
+})
+
 // Quit app.
 ipcMain.on('quitapp', (evt, arg) => {
   app.quit()
 })
 
-app.on('will-quit', () => {
-  // Unregister all shortcuts.
-  globalShortcut.unregisterAll()
+ipcMain.on('opentree', () => {
+  mainWindow.loadURL(`file://${__dirname}/` + "tree.html")
 })
+
 /* #endregion */

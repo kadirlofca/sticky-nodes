@@ -67,6 +67,7 @@
 	margin-right: 0;
 	margin-left: 0;
     border: 0px solid;
+	overflow: hidden;
 
 	background: linear-gradient(var(--sncolor), var(--snaccent));
 	box-shadow: 0px 0px 2px inset rgba(0, 0, 0, 0.1);
@@ -79,7 +80,9 @@
 	font-weight: 500;
 	font-size: 12.5px;
 	margin: 8px;
-	
+	overflow: hidden;
+	height: 90%;
+
 	-webkit-app-region: no-drag;
 }
 
