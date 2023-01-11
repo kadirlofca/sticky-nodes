@@ -16,6 +16,6 @@
   "author": "Kadir Lofca",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^18.2.0"
+    "electron": "^22.0.1"
   }
 }
